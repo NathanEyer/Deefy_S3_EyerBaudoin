@@ -1,13 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deefy</title>
+</head>
+<body>
+    <p>Deefy</p>
+
+    <a href="index.php?action=playlist">playlist</a>
+</body>
+</html>
+
+
 <?php
-//Avec Composer.json
+
 require_once 'src/vendor/autoload.php';
 
-//Avec mon loader
-//require_once 'src/loader/Loader.php';
-//$loader = new Loader("iutnc\\deefy\\","src" . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR);
-//$loader->register();
-
-//Use pour se facilier la tâche
+//Use pour se faciliter la tâche
 use iutnc\deefy\audio\tracks\AlbumTrack;
 use iutnc\deefy\audio\lists\Album;
 use iutnc\deefy\audio\lists\Playlist;
@@ -75,3 +86,4 @@ foreach ($playlist as $track) {
         echo $r->render(Renderer::LONG) . "<br>";
     }
 }
+?>
