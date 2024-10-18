@@ -9,11 +9,19 @@ class AlbumTrack extends AudioTrack {
     protected int $trackNumber;
 
     /**
-     * @param $file string
-     * @param $title string
+     * @param string $title
+     * @param string $artist
+     * @param string $sort
+     * @param int $time
+     * @param string $fileName
+     * @param int $year
+     * @param string $album
+     * @param int $trackNumber
      */
-    public function __construct(string $title, string $file){
-        parent::__construct($title, $file);
+    public function __construct(string $title, string $artist, string $sort, int $time, string $fileName, int $year, string $album, int $trackNumber) {
+        parent::__construct($title, $artist, $sort, $time, $fileName, $year);
+        $this->trackNumber = $trackNumber;
+        $this->album = $album;
     }
 
     /**
