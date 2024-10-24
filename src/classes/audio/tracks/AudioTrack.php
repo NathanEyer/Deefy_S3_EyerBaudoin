@@ -13,12 +13,22 @@ abstract class AudioTrack{
 
     /**
      * @param string $title
+     * @param string $artist
+     * @param string $sort
+     * @param string $time
      * @param string $fileName
+     * @param int $year
      */
-    public function __construct(string $title, string $fileName){
+    public function __construct(string $title, string $artist, string $sort, string $time, string $fileName, int $year)
+    {
         $this->title = $title;
+        $this->artist = $artist;
+        $this->sort = $sort;
+        $this->time = $time;
         $this->fileName = $fileName;
+        $this->year = $year;
     }
+
 
     /**
      * Affiche correctement la piste

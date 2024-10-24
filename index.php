@@ -30,34 +30,14 @@ use iutnc\deefy\render\Renderer;
 
 try {
     // Création de pistes d'album
-    $piste1 = new AlbumTrack("Blinding Lights", "resources/Blinding_Lights.mp3");
-    $piste1->setAlbum("After Hours");
-    $piste1->setArtist("The Weeknd");
-    $piste1->setSort("Pop");
-    $piste1->setTrackNumber(1);
-    $piste1->setYear(2020);
-    $piste1->setTime(194);
+    $piste1 = new AlbumTrack("Blinding Lights", "The Weeknd", "Pop", 194, "resources/Blinding_Lights.mp3", 2020, "After Hours", 1);
 
-    $piste2 = new AlbumTrack("Save Your Tears", "resources/Save_Your_Tears.mp3");
-    $piste2->setAlbum("After Hours");
-    $piste2->setArtist("The Weeknd");
-    $piste2->setSort("Pop");
-    $piste2->setTrackNumber(2);
-    $piste2->setYear(2020);
-    $piste2->setTime(245);
+    $piste2 = new AlbumTrack("Save Your Tears", "The Weeknd", "Pop", 245, "resources/Save_Your_Tears.mp3", 2020, "After Hours", 2);
 
     // Création de pistes de podcast
-    $piste3 = new PodcastTrack("Le regard des autres", "resources/RegardDesAutres.mp3");
-    $piste3->setArtist("Le Précepteur");
-    $piste3->setSort("Podcast");
-    $piste3->setYear(2021);
-    $piste3->setTime(2468);
+    $piste3 = new PodcastTrack("Le regard des autres", "Le Précepteur", "PodCast", 2468, "resources/RegardDesAutres.mp3", 2021);
 
-    $piste4 = new PodcastTrack("Stuff You Should Know", "resources/StuffYouShouldKnow.mp3");
-    $piste4->setArtist("Josh & Chuck");
-    $piste4->setSort("Podcast");
-    $piste4->setYear(2021);
-    $piste4->setTime(2823);
+    $piste4 = new PodcastTrack("Stuff You Should Know", "Josh & Chuck", "PodCast", 2823, "resources/StuffYouShouldKnow.mp3", 2021);
 
     // Création de l'album
     $album = new Album("After Hours", [$piste1, $piste2], "The Weeknd", 2020);
