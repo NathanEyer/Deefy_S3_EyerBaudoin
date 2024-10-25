@@ -16,6 +16,9 @@ class DisplayPlaylistAction extends Action
         }
 
         $playlist = $_SESSION['playlist'];
+        if (empty($playlist)) {
+            return "Playlist vide";
+        $playlist = $_SESSION['playlist'];
         if ($playlist->__get('sumTracks')==0){
             return "La playlist est vide";
         }

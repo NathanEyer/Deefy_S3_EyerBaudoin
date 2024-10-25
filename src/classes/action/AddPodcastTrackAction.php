@@ -12,20 +12,20 @@ class AddPodcastTrackAction extends Action
     {
         session_start();
 
-        if (isset($_SESSION['playlist'])) {
-            $piste1 = new PodcastTrack("Le regard des autres", "resources/RegardDesAutres.mp3");
-            $piste1->setArtist("Le Précepteur");
-            $piste1->setSort("Podcast");
-            $piste1->setYear(2021);
-            try {
-                $piste1->setTime(194);
-            } catch (InvalidPropertyValueException $e) {
-                print $e->getMessage();
-            }
-            $_SESSION['playlist']->addTrack($piste1);
-            return "PodcastTrack ajouté";
-        } else {
-            return "<p>Playlist inexistante</p>";
-        }
+        if(!isset($_SESSION['playlist'])) {return "Playlist inexistante";}
+
+        if(!isset($_SESSION['inconnu'])) {$_SESSION['inconnu'] = 0;}
+
+        $title = $_POST["title"] ?? 'inconnu'.++$_SESSION['inconnu'];
+        $fileName = $_POST['fileName'] ?? 'resources/default.mp3';
+        $artist = $_POST['artist'] ?? 'Artiste inconnu';
+        $year = $_POST['year'] ?? 'Année inconnue';
+        $time = $_POST['time'] ?? '0';
+        $sort = $_POST['sort'] ?? 'Podcast';
+
+        $piste = new PodcastTrack($title, $artist, $sort, $time, $fileName, $year);
+
+        $_SESSION['playlist']->addTrack($piste);
+        return "<p>PodcastTrack '$title' ajouté à la playlist</p>";
     }
 }

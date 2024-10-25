@@ -9,37 +9,30 @@ use iutnc\deefy\action\DisplayPlaylistAction;
 
 class Dispatcher
 {
-    private string $action;
+    private $action;
 
+    /**
+     * @param $action
+     */
     public function __construct()
-    {   
-        if(isset($_GET['action'])){
-            $this->action = $_GET['action'];
-        } else {
-            $this->action = 'default' ;
-        }
+    {
+        $this->action = $_GET['action'];
     }
 
     public function run(): void{
-
         switch($this->action){
             case 'default':
-                $html = (new DefaultAction)->execute();
+                (new DefaultAction)->execute();
                 break;
             case 'playlist':
-                $html = (new DisplayPlaylistAction())->execute();
+                (new DisplayPlaylistAction())->execute();
                 break;
             case 'add-playlist':
-                $html = (new AddPlaylistAction())->execute();
+                (new AddPlaylistAction())->execute();
                 break;
             case 'add-track':
-                $html = (new AddPodcastTrackAction())->execute();
+                (new AddPodcastTrackAction())->execute();
                 break;
         }
-        $this->renderPage($html);
-    }
-
-    private function renderPage(string $html) : void {
-        echo $html ;
     }
 }
