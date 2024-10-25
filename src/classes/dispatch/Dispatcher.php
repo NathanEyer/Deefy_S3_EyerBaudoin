@@ -22,17 +22,22 @@ class Dispatcher
     public function run(): void{
         switch($this->action){
             case 'default':
-                (new DefaultAction)->execute();
+                $html = (new DefaultAction)->execute();
                 break;
             case 'playlist':
-                (new DisplayPlaylistAction())->execute();
+                $html = (new DisplayPlaylistAction())->execute();
                 break;
             case 'add-playlist':
-                (new AddPlaylistAction())->execute();
+                $html = (new AddPlaylistAction())->execute();
                 break;
             case 'add-track':
-                (new AddPodcastTrackAction())->execute();
+                $html = (new AddPodcastTrackAction())->execute();
                 break;
         }
+        $this->renderPage($html);
+    }
+
+    private function renderPage(string $html) : void {
+        echo $html ;
     }
 }
