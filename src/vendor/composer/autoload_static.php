@@ -19,6 +19,7 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'iutnc\\deefy\\audio\\tracks\\AlbumTrack' => __DIR__ . '/../..' . '/classes/audio/tracks/AlbumTrack.php',
         'iutnc\\deefy\\audio\\tracks\\AudioTrack' => __DIR__ . '/../..' . '/classes/audio/tracks/AudioTrack.php',
         'iutnc\\deefy\\audio\\tracks\\PodcastTrack' => __DIR__ . '/../..' . '/classes/audio/tracks/PodcastTrack.php',
+        'iutnc\\deefy\\dispatch\\Dispatcher' => __DIR__ . '/../..' . '/classes/dispatch/Dispatcher.php',
         'iutnc\\deefy\\exception\\InvalidPropertyNameException' => __DIR__ . '/../..' . '/classes/exception/InvalidPropertyNameException.php',
         'iutnc\\deefy\\exception\\InvalidPropertyValueException' => __DIR__ . '/../..' . '/classes/exception/InvalidPropertyValueException.php',
         'iutnc\\deefy\\render\\AlbumTrackRenderer' => __DIR__ . '/../..' . '/classes/render/AlbumTrackRenderer.php',
@@ -26,6 +27,7 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'iutnc\\deefy\\render\\AudioTrackRenderer' => __DIR__ . '/../..' . '/classes/render/AudioTrackRenderer.php',
         'iutnc\\deefy\\render\\PodcastRenderer' => __DIR__ . '/../..' . '/classes/render/PodcastRenderer.php',
         'iutnc\\deefy\\render\\Renderer' => __DIR__ . '/../..' . '/classes/render/Renderer.php',
+        'iutnc\\deefy\\repository\\DeefyRepository' => __DIR__ . '/../..' . '/classes/repository/DeefyRepository.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

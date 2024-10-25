@@ -18,6 +18,7 @@ return array(
     'iutnc\\deefy\\audio\\tracks\\AlbumTrack' => $baseDir . '/classes/audio/tracks/AlbumTrack.php',
     'iutnc\\deefy\\audio\\tracks\\AudioTrack' => $baseDir . '/classes/audio/tracks/AudioTrack.php',
     'iutnc\\deefy\\audio\\tracks\\PodcastTrack' => $baseDir . '/classes/audio/tracks/PodcastTrack.php',
+    'iutnc\\deefy\\dispatch\\Dispatcher' => $baseDir . '/classes/dispatch/Dispatcher.php',
     'iutnc\\deefy\\exception\\InvalidPropertyNameException' => $baseDir . '/classes/exception/InvalidPropertyNameException.php',
     'iutnc\\deefy\\exception\\InvalidPropertyValueException' => $baseDir . '/classes/exception/InvalidPropertyValueException.php',
     'iutnc\\deefy\\render\\AlbumTrackRenderer' => $baseDir . '/classes/render/AlbumTrackRenderer.php',
@@ -25,4 +26,5 @@ return array(
     'iutnc\\deefy\\render\\AudioTrackRenderer' => $baseDir . '/classes/render/AudioTrackRenderer.php',
     'iutnc\\deefy\\render\\PodcastRenderer' => $baseDir . '/classes/render/PodcastRenderer.php',
     'iutnc\\deefy\\render\\Renderer' => $baseDir . '/classes/render/Renderer.php',
+    'iutnc\\deefy\\repository\\DeefyRepository' => $baseDir . '/classes/repository/DeefyRepository.php',
 );
