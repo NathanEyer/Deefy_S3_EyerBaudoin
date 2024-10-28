@@ -11,9 +11,6 @@ class Dispatcher
 {
     private $action;
 
-    /**
-     * @param $action
-     */
     public function __construct()
     {
         $this->action = $_GET['action'];
