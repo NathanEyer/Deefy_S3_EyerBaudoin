@@ -9,13 +9,13 @@ session_start();
 
 class AddPlaylistAction extends Action
 {
-    private $nom = "feur";
     public function execute(): string
     {
-        $playlist = new Playlist($this->nom);
+        $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
 
-        $_SESSION['playlist'] = $playlist;
+        $playlist = new Playlist($nom);
+        $_SESSION[$nom] = $playlist;
 
-        return "Playlist {$this->nom} créé";
+        return "Nouvelle playlist: {$nom}";
     }
 }

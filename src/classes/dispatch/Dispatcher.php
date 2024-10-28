@@ -21,7 +21,7 @@ class Dispatcher
             case 'default':
                 $html = (new DefaultAction)->execute();
                 break;
-            case 'playlist':
+            case 'show_playlist':
                 $html = (new DisplayPlaylistAction())->execute();
                 break;
             case 'add-playlist':
