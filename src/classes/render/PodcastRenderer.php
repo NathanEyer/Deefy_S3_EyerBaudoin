@@ -23,7 +23,7 @@ class PodcastRenderer extends AudioTrackRenderer {
             . "<p> Votre navigateur ne prend pas en charge l'audio HTML5. Voici un"
             . "<a href=\"$t->fileName\">lien vers le fichier audio</a> à la place."
             . "</p></audio>"
-            . $t->title . "(" . $t->sort . ")"
+            . "Podcast: " . $t->title . "(" . $t->sort . ")"
             . " en " . $t->year . " par " . $t->artist
             . " d'une durée de "
             . $t->time . "s";

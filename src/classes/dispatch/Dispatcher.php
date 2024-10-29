@@ -2,10 +2,13 @@
 
 namespace iutnc\deefy\dispatch;
 
+use iutnc\deefy\action\AddAlbumTrackAction;
 use iutnc\deefy\action\AddPlaylistAction;
 use iutnc\deefy\action\AddPodcastTrackAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
+use iutnc\deefy\action\DisplayPlaylistsAction;
+
 
 class Dispatcher
 {
@@ -13,7 +16,7 @@ class Dispatcher
 
     public function __construct()
     {
-        $this->action = $_GET['action'];
+        $this->action = $_GET['action'] ?? 'default';
     }
 
     public function run(): void{
@@ -21,14 +24,20 @@ class Dispatcher
             case 'default':
                 $html = (new DefaultAction)->execute();
                 break;
-            case 'show_playlist':
+            case 'show-playlist':
                 $html = (new DisplayPlaylistAction())->execute();
+                break;
+            case 'show-playlists':
+                $html = (new DisplayPlaylistsAction())->execute();
                 break;
             case 'add-playlist':
                 $html = (new AddPlaylistAction())->execute();
                 break;
-            case 'add-track':
+            case 'add-podcasttrack':
                 $html = (new AddPodcastTrackAction())->execute();
+                break;
+            case 'add-albumtrack':
+                $html = (new AddAlbumTrackAction())->execute();
                 break;
         }
         $this->renderPage($html);

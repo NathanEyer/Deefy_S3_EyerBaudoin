@@ -9,10 +9,12 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'iutnc\\deefy\\action\\Action' => __DIR__ . '/../..' . '/classes/action/Action.php',
+        'iutnc\\deefy\\action\\AddAlbumTrackAction' => __DIR__ . '/../..' . '/classes/action/AddAlbumTrackAction.php',
         'iutnc\\deefy\\action\\AddPlaylistAction' => __DIR__ . '/../..' . '/classes/action/AddPlaylistAction.php',
         'iutnc\\deefy\\action\\AddPodcastTrackAction' => __DIR__ . '/../..' . '/classes/action/AddPodcastTrackAction.php',
         'iutnc\\deefy\\action\\DefaultAction' => __DIR__ . '/../..' . '/classes/action/DefaultAction.php',
         'iutnc\\deefy\\action\\DisplayPlaylistAction' => __DIR__ . '/../..' . '/classes/action/DisplayPlaylistAction.php',
+        'iutnc\\deefy\\action\\DisplayPlaylistsAction' => __DIR__ . '/../..' . '/classes/action/DisplayPlaylistsAction.php',
         'iutnc\\deefy\\audio\\lists\\Album' => __DIR__ . '/../..' . '/classes/audio/lists/Album.php',
         'iutnc\\deefy\\audio\\lists\\AudioList' => __DIR__ . '/../..' . '/classes/audio/lists/AudioList.php',
         'iutnc\\deefy\\audio\\lists\\Playlist' => __DIR__ . '/../..' . '/classes/audio/lists/Playlist.php',

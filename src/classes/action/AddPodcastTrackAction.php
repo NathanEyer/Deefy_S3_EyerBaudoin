@@ -10,22 +10,24 @@ class AddPodcastTrackAction extends Action
 {
     public function execute(): string
     {
-        session_start();
+        //Vérifie l'existence de playlists
+        if(empty($_SESSION['playlists'])) {return "Playlist inexistante";}
 
-        if(!isset($_SESSION['playlist'])) {return "Playlist inexistante";}
+        $playlist = end($_SESSION['playlists']);
 
-        if(!isset($_SESSION['inconnu'])) {$_SESSION['inconnu'] = 0;}
+        //Nettoye chaque valeurs donnés dans le formulaire
+        $title = filter_input(INPUT_POST, 'podcast-title', FILTER_SANITIZE_STRING);
+        $fileName = filter_input(INPUT_POST, 'podcast-fileName', FILTER_SANITIZE_STRING);
+        $artist = filter_input(INPUT_POST, 'podcast-artist', FILTER_SANITIZE_STRING);
+        $year = filter_input(INPUT_POST, 'podcast-year', FILTER_SANITIZE_STRING);
+        $sort = filter_input(INPUT_POST, 'podcast-sort', FILTER_SANITIZE_STRING);
+        $time = filter_input(INPUT_POST, 'podcast-time', FILTER_SANITIZE_STRING);
 
-        $title = $_POST["title"] ?? 'inconnu'.++$_SESSION['inconnu'];
-        $fileName = $_POST['fileName'] ?? 'resources/default.mp3';
-        $artist = $_POST['artist'] ?? 'Artiste inconnu';
-        $year = $_POST['year'] ?? 'Année inconnue';
-        $time = $_POST['time'] ?? '0';
-        $sort = $_POST['sort'] ?? 'Podcast';
-
+        //Crée le podcast
         $piste = new PodcastTrack($title, $artist, $sort, $time, $fileName, $year);
 
-        $_SESSION['playlist']->addTrack($piste);
-        return "<p>PodcastTrack '$title' ajouté à la playlist</p>";
+        //Ajoute
+        end($_SESSION['playlists'])->addTrack($piste);
+        return "PodcastTrack '$title' ajouté à la playlist";
     }
 }

@@ -8,10 +8,12 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'iutnc\\deefy\\action\\Action' => $baseDir . '/classes/action/Action.php',
+    'iutnc\\deefy\\action\\AddAlbumTrackAction' => $baseDir . '/classes/action/AddAlbumTrackAction.php',
     'iutnc\\deefy\\action\\AddPlaylistAction' => $baseDir . '/classes/action/AddPlaylistAction.php',
     'iutnc\\deefy\\action\\AddPodcastTrackAction' => $baseDir . '/classes/action/AddPodcastTrackAction.php',
     'iutnc\\deefy\\action\\DefaultAction' => $baseDir . '/classes/action/DefaultAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistAction' => $baseDir . '/classes/action/DisplayPlaylistAction.php',
+    'iutnc\\deefy\\action\\DisplayPlaylistsAction' => $baseDir . '/classes/action/DisplayPlaylistsAction.php',
     'iutnc\\deefy\\audio\\lists\\Album' => $baseDir . '/classes/audio/lists/Album.php',
     'iutnc\\deefy\\audio\\lists\\AudioList' => $baseDir . '/classes/audio/lists/AudioList.php',
     'iutnc\\deefy\\audio\\lists\\Playlist' => $baseDir . '/classes/audio/lists/Playlist.php',
