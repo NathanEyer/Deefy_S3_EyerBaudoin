@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace iutnc\deefy\audio\lists;
 /**
  * Sous-classe d'AudioList qui représente un album

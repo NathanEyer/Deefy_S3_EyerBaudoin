@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace iutnc\deefy\audio\tracks;
 /**
  * Crée une piste de podcast
