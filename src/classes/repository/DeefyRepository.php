@@ -1,5 +1,4 @@
 <?php
-declare(strict_types = 1);
 
 namespace iutnc\deefy\repository;
 
@@ -12,8 +11,11 @@ class DeefyRepository
     private static array $connexion = [];
 
     private function __construct(array $conf) {
-        $this->pdo = new \PDO($conf['dsn'], $conf['user'], $conf['pass'],
-            [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+
+        $address = 'mysql:host='.$conf['host'].':'.$conf['port'].';dbname='.$conf['dbname'].';charset=utf8' ;
+
+        $this->pdo = new \PDO($address, $conf['username'], $conf['password']);
+        // [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION] a voir l'utilite du param la
     }
 
     public static function setConfig(string $file) {
@@ -21,14 +23,20 @@ class DeefyRepository
         if ($conf === false) {
             throw new \Exception("Error reading configuration file");
         }
-        self::$connexion = [ 'dsn'=> "...",'user'=> $conf['username'],'pass'=> '...' ];
+        self::$connexion = [
+            'host'=> $conf['host'],
+            'port'=> $conf['port'],
+            'dbname'=> $conf['dbname'],
+            'username'=> $conf['username'],
+            'password'=> $conf['password'] 
+        ];
     }
 
-    public function getInstance(): array{
+    public static function getInstance(): DeefyRepository{
         if(is_null(self::$instance)){
             self::$instance = new DeefyRepository(self::$connexion);
         }
-        return self::$connexion;
+        return self::$instance;
     }
 
     //TOUTES LES METHODES A COMPLETER
