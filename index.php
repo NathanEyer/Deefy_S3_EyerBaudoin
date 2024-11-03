@@ -14,13 +14,13 @@ use iutnc\deefy\dispatch\Dispatcher ;
 use iutnc\deefy\repository\DeefyRepository ;
 session_start();
 
-try{
-    DeefyRepository::setConfig('src/configdb.ini') ;
-    $d = new Dispatcher() ;
-    $d->run();
-} catch (\Exception $e){
-    echo $e->getMessage() ;
-}
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+DeefyRepository::setConfig('src/configdb.ini') ;
+$d = new Dispatcher() ;
+$d->run();
 
 ?>
 

@@ -9,6 +9,7 @@ use iutnc\deefy\action\AddPodcastTrackAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
 use iutnc\deefy\action\DisplayPlaylistsAction;
+use iutnc\deefy\action\DisplayAllTrackAction;
 
 
 class Dispatcher
@@ -39,6 +40,9 @@ class Dispatcher
                 break;
             case 'add-albumtrack':
                 $html = (new AddAlbumTrackAction())->execute();
+                break;
+            case 'show-tracks':
+                $html = (new DisplayAllTrackAction())->execute();
                 break;
         }
         $this->renderPage($html);

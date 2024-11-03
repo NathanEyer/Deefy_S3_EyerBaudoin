@@ -3,6 +3,7 @@
 namespace iutnc\deefy\repository;
 
 use iutnc\deefy\audio\lists\Playlist;
+use iutnc\deefy\audio\tracks\AlbumTrack ;
 
 class DeefyRepository
 {
@@ -10,7 +11,7 @@ class DeefyRepository
     private static ?DeefyRepository $instance = null;
     private static array $connexion = [];
 
-    private function __construct(array $conf) {
+    private function __construct(array $conf){
 
         $address = 'mysql:host='.$conf['host'].':'.$conf['port'].';dbname='.$conf['dbname'].';charset=utf8' ;
 
@@ -63,5 +64,23 @@ class DeefyRepository
 
     public function addTrackPlaylist(Playlist $pl): Playlist {
         return new Playlist($pl, []);
+    }
+
+    // Renvoie un array de AudioTrack
+    public function findAllTrack(): array {
+        
+        $query = "select titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
+        $stmt = $this->pdo->prepare($query) ;
+        $stmt->execute() ;
+
+        $a = [] ;
+        $result = $stmt->fetch() ;
+        while($result!=null){
+            if($result['artiste_album']!=null){
+            $a[] = new AlbumTrack($result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
+            $result = $stmt->fetch() ;
+        }
+
+        return $a ;
     }
 }

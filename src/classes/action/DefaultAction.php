@@ -21,6 +21,7 @@ class DefaultAction extends Action {
         <ul>
     <li><a href="index.php?action=show-playlist">Afficher la playlist courante</a></li>
     <li><a href="index.php?action=show-playlists">Afficher toutes les playlists</a></li>
+    <li><a href="index.php?action=show-tracks">Afficher tte les tracks</a></li>
     <li>
         <form action="index.php?action=add-playlist" method="POST">
             <label for="nom">Nouvelle playlist:</label>

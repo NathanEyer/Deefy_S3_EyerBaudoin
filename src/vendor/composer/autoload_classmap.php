@@ -12,6 +12,7 @@ return array(
     'iutnc\\deefy\\action\\AddPlaylistAction' => $baseDir . '/classes/action/AddPlaylistAction.php',
     'iutnc\\deefy\\action\\AddPodcastTrackAction' => $baseDir . '/classes/action/AddPodcastTrackAction.php',
     'iutnc\\deefy\\action\\DefaultAction' => $baseDir . '/classes/action/DefaultAction.php',
+    'iutnc\\deefy\\action\\DisplayAllTrackAction' => $baseDir . '/classes/action/DisplayAllTrackAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistAction' => $baseDir . '/classes/action/DisplayPlaylistAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistsAction' => $baseDir . '/classes/action/DisplayPlaylistsAction.php',
     'iutnc\\deefy\\audio\\lists\\Album' => $baseDir . '/classes/audio/lists/Album.php',
