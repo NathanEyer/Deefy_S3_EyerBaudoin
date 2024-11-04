@@ -42,7 +42,6 @@ class DeefyRepository
     }
 
     //TOUTES LES METHODES A COMPLETER
-    //Vérification appel hote provider if(loggé) else erreur
     public function findAllPlaylist(): array {
         try {
             Auth::checkRole(User::ADMIN_USER);
@@ -54,7 +53,7 @@ class DeefyRepository
             $a = [] ;
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC); ;
             foreach ($result as $r) {
-                $playlist = new Playlist($r['nom']);
+                $playlist = new Playlist($r['id'], $r['nom']);
                 $playlist->setId($r['id']);
                 $a[] = $playlist;
             }
@@ -76,7 +75,7 @@ class DeefyRepository
 
                 $result = $stmt->fetch(\PDO::FETCH_ASSOC);
                 if ($result) {
-                    return new Playlist($result['nom']);
+                    return new Playlist($result['id'], $result['nom']);
                 }
                 return null;
             }catch (\PDOException $e){
