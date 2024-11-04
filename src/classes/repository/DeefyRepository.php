@@ -4,6 +4,7 @@ namespace iutnc\deefy\repository;
 
 use iutnc\deefy\audio\lists\Playlist;
 use iutnc\deefy\audio\tracks\AlbumTrack ;
+use iutnc\deefy\audio\tracks\AudioTrack;
 
 class DeefyRepository
 {
@@ -41,34 +42,76 @@ class DeefyRepository
     }
 
     //TOUTES LES METHODES A COMPLETER
-    public function findAllPlaylist(int $id): array {
-        return [new Playlist($id, [])];
+    //Vérification appel hote provider if(loggé) else erreur
+    public function findAllPlaylist(): array {
+        $query = "Select id, nom from playlist";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+
+        $a = [] ;
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC); ;
+        foreach ($result as $r) {
+            $playlist = new Playlist($r['nom']);
+            $playlist->setId($r['id']);
+            $a[] = $playlist;
+        }
+
+        return $a ;
     }
 
-    public function findPlaylistById(int $id): Playlist {
-        return new Playlist($id, []);
+    public function findPlaylistById(int $id): ?Playlist {
+        try {
+            $query = 'Select id, nom from playlist where id = :id';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(['id' => $id]);
+
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if ($result) {
+                return new Playlist($result['nom']);
+            }
+            return null;
+        }catch (\PDOException $e){
+            throw new \Exception($e->getMessage());
+        }
+
     }
+
 
     public function saveEmptyPlaylist(Playlist $pl): Playlist {
         $query = "Insert into playlist (nom) values (:nom)";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute(['nom' => $pl->nom]);
-        //SETID A CREER
+        
         $pl->setID($this->pdo->lastInsertId());
         return $pl;
     }
 
-    public function saveTrack(Playlist $pl): Playlist {
-        return new Playlist($pl, []);
+    public function saveTrack(AudioTrack $aT) {
+        $query = 'INSERT INTO track (titre, genre, duree, fileName, artiste_album, annee_album) 
+              VALUES (:title, :sort, :time, :fileName, :artist, :year)';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'title' => $aT->title,
+            'sort' => $aT->sort,
+            'time' => $aT->time,
+            'fileName' => $aT->fileName,
+            'artist' => $aT->artist,
+            'year' => $aT->year
+        ]);
     }
 
-    public function addTrackPlaylist(Playlist $pl): Playlist {
-        return new Playlist($pl, []);
+    public function addTrackPlaylist(Playlist $pl, AudioTrack $ad): void {
+        $query = "Insert into playlist2track (playlist_id, track_id) values (:playlist_id :track_id)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'playlist_id' => $pl->id,
+            'track_id' => $ad->id
+        ]);
     }
 
     // Renvoie un array de AudioTrack
     public function findAllTrack(): array {
-        
+
         $query = "select titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
         $stmt = $this->pdo->prepare($query) ;
         $stmt->execute() ;

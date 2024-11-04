@@ -8,12 +8,16 @@ use iutnc\deefy\audio\tracks\AudioTrack;
  * Crée une playlist
  */
 class Playlist extends AudioList{
+    private int $id;
+
     /**
+     * @param int $id
      * @param string $name
      * @param array $tracksList
      */
-    public function __construct(string $name, array $tracksList = []){
+    public function __construct(int $id, string $name, array $tracksList = []){
         parent::__construct($name, $tracksList);
+        $this->id = $id;
     }
 
     /**
@@ -54,6 +58,15 @@ class Playlist extends AudioList{
         foreach($tracks as $track){
             $this->addTrack($track);
         }
+        $this->refresh();
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($number):void{
+        $this->id = $number;
         $this->refresh();
     }
 }
