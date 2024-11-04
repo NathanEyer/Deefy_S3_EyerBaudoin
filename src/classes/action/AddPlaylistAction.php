@@ -10,7 +10,7 @@ class AddPlaylistAction extends Action
     public function execute(): string
     {
         //Vérifie que le nom est acceptable
-        $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
+        $nom = filter_input(INPUT_POST, 'nom', FILTER_DEFAULT);
 
         //Crée la playlist
         $playlist = new Playlist($nom);

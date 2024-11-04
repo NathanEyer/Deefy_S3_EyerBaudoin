@@ -18,7 +18,11 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-DeefyRepository::setConfig('src/configdb.ini') ;
+try {
+    DeefyRepository::setConfig('src/configdb.ini');
+} catch (Exception $e) {
+
+}
 $d = new Dispatcher() ;
 $d->run();
 
