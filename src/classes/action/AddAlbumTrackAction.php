@@ -7,9 +7,7 @@ use iutnc\deefy\audio\tracks\AlbumTrack;
 
 class AddAlbumTrackAction extends Action
 {
-
-    public function execute(): string
-    {
+    public function execute(): string{
         //Vérifie l'existence de playlists
         if(empty($_SESSION['playlists'])) {return "Playlist inexistante";}
 
