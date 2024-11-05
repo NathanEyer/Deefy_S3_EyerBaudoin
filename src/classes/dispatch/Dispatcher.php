@@ -10,6 +10,7 @@ use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
 use iutnc\deefy\action\DisplayPlaylistsAction;
 use iutnc\deefy\action\DisplayAllTrackAction;
+use iutnc\deefy\action\SigninAction;
 
 
 class Dispatcher
@@ -43,6 +44,12 @@ class Dispatcher
                 break;
             case 'show-tracks':
                 $html = (new DisplayAllTrackAction())->execute();
+                break;
+            case 'signin':
+                $html = (new SigninAction())->execute();
+                break;
+            default :
+                $html = (new DefaultAction)->execute();
                 break;
         }
         $this->renderPage($html);

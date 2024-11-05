@@ -14,7 +14,7 @@ class DeefyRepository
 
     private function __construct(array $conf){
 
-        $address = 'mysql:host='.$conf['host'].':'.$conf['port'].';dbname='.$conf['dbname'].';charset=utf8' ;
+        $address = 'mysql:host='.$conf['host'].':'.$conf['port']    .';dbname='.$conf['dbname'].';charset=utf8' ;
 
         $this->pdo = new \PDO($address, $conf['username'], $conf['password']);
         // [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION] a voir l'utilite du param la
@@ -41,130 +41,140 @@ class DeefyRepository
         return self::$instance;
     }
 
-    //TOUTES LES METHODES A COMPLETER
     public function findAllPlaylist(): array {
-        try {
-            Auth::checkRole(User::ADMIN_USER);
 
-            $query = "Select id, nom from playlist";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute();
+        $query = "Select id, nom from playlist";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
 
-            $a = [] ;
-            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC); ;
-            foreach ($result as $r) {
-                $playlist = new Playlist($r['id'], $r['nom']);
-                $playlist->setId($r['id']);
-                $a[] = $playlist;
-            }
-
-            return $a ;
-        } catch(UserException $e) {
-            throw new \Exception($e->getMessage());
+        $a = [] ;
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC); ;
+        foreach ($result as $r) {
+            $playlist = new Playlist($r['id'], $r['nom']);
+            $playlist->setId($r['id']);
+            $a[] = $playlist;
         }
+
+        return $a ;
     }
 
     public function findPlaylistById(int $id): ?Playlist {
-        try {
-            Auth::checkRole(User::ADMIN_USER);
 
-            try {
-                $query = 'Select id, nom from playlist where id = :id';
-                $stmt = $this->pdo->prepare($query);
-                $stmt->execute(['id' => $id]);
+        $query = 'Select id, nom from playlist where id = :id';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id' => $id]);
 
-                $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-                if ($result) {
-                    return new Playlist($result['id'], $result['nom']);
-                }
-                return null;
-            }catch (\PDOException $e){
-                throw new \Exception($e->getMessage());
-            }
-        } catch(UserException $e) {
-            throw new \Exception($e->getMessage());
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($result) {
+            return new Playlist($result['id'], $result['nom']);
         }
+        return null;
 
     }
 
 
     public function saveEmptyPlaylist(Playlist $pl): Playlist {
-        try {
-            Auth::checkRole(User::ADMIN_USER);
 
-            $query = "Insert into playlist (nom) values (:nom)";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute(['nom' => $pl->nom]);
+        $query = "Insert into playlist (nom) values (:nom)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['nom' => $pl->nom]);
 
-            $pl->setID($this->pdo->lastInsertId());
-            return $pl;
-        } catch(UserException $e) {
-            throw new \Exception($e->getMessage());
-        }
-
-
+        $pl->setID($this->pdo->lastInsertId());
+        return $pl;
     }
 
     public function saveTrack(AudioTrack $aT) {
-        try {
-            Auth::checkRole(User::ADMIN_USER);
-            $query = 'INSERT INTO track (titre, genre, duree, fileName, artiste_album, annee_album) 
-              VALUES (:title, :sort, :time, :fileName, :artist, :year)';
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'title' => $aT->title,
-                'sort' => $aT->sort,
-                'time' => $aT->time,
-                'fileName' => $aT->fileName,
-                'artist' => $aT->artist,
-                'year' => $aT->year
-            ]);
 
-        } catch(AccessControlException $e) {
-            throw new \Exception($e->getMessage());
-        }
-
-
+        $query = 'INSERT INTO track (titre, genre, duree, fileName, artiste_album, annee_album) 
+          VALUES (:title, :sort, :time, :fileName, :artist, :year)';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'title' => $aT->title,
+            'sort' => $aT->sort,
+            'time' => $aT->time,
+            'fileName' => $aT->fileName,
+            'artist' => $aT->artist,
+            'year' => $aT->year
+        ]);
     }
 
     public function addTrackPlaylist(Playlist $pl, AudioTrack $ad): void {
-        try {
-            Auth::checkRole(User::ADMIN_USER);
-            Auth::checkPlaylistOwner($pl->getID());
 
-            $query = "Insert into playlist2track (playlist_id, track_id) values (:playlist_id :track_id)";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'playlist_id' => $pl->id,
-                'track_id' => $ad->id
-            ]);
-        } catch(AccessControlException $e) {
-            throw new \Exception($e->getMessage());
-        }
-
-
+        $query = "Insert into playlist2track (playlist_id, track_id) values (:playlist_id :track_id)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'playlist_id' => $pl->id,
+            'track_id' => $ad->id
+        ]);
     }
 
     // Renvoie un array de AudioTrack
     public function findAllTrack(): array {
-        try {
-            Auth::checkRole(User::ADMIN_USER);
 
-            $query = "select titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
-            $stmt = $this->pdo->prepare($query) ;
-            $stmt->execute() ;
+        $query = "select titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
+        $stmt = $this->pdo->prepare($query) ;
+        $stmt->execute() ;
 
-            $a = [] ;
+        $a = [] ;
+        $result = $stmt->fetch() ;
+        while($result!=null){
+            if($result['artiste_album']!=null){
+                $a[] = new AlbumTrack($result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
             $result = $stmt->fetch() ;
-            while($result!=null){
-                if($result['artiste_album']!=null){
-                    $a[] = new AlbumTrack($result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
-                $result = $stmt->fetch() ;
-            }
-
-            return $a ;
-        } catch(AccessControlException $e) {
-            throw new \Exception($e->getMessage());
         }
+
+        return $a ;
+    }
+
+    public function getUserByEmail(string $email): array {
+        $query = "SELECT * FROM User WHERE email = :email";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['email' => $email]);
+
+        $userData = $stmt->fetch();
+
+        if (empty($userData)) {
+            throw new \Exception("User not found");
+        }
+        return $userData;
+    }
+
+    public function getUserByID(string $id): array {
+        $query = "SELECT * FROM deefy_user WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id' => $id]);
+
+        $userData = $stmt->fetch();
+
+        if (empty($userData)) {
+            throw new \Exception("User not found");
+        }
+        return $userData;
+    }
+
+
+    public function addUser(string $email, string $hash, int $role) {
+        $query = "INSERT INTO User (email, passwd, role) VALUES (:email, :passwd, :role)";
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->execute(['email' => $email, 'passwd' => $hash, 'role' => $role]);
+    }
+
+    public function asPermission(string $id, string $perm): bool {
+        $query = "SELECT * FROM User WHERE id = :id AND role = :role";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id' => $id, 'role' => $perm]);
+
+        $row = $stmt->fetch();
+        return $row >= $perm;
+    }
+
+    public function isPlaylistOwner(string $id, string $pl_id): bool {
+        $query = "SELECT * FROM user2playlist WHERE id_user = :id_user AND id_pl = :id_pl";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id_user' => $id, 'id_pl' => $pl_id]);
+
+        $row = $stmt->fetch();
+        return $row !== false;
     }
 }
