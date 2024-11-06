@@ -11,11 +11,13 @@ class SigninAction extends Action {
 
         $ret = "<h1>Page pour s'inscrire</h1>" ;
 
-        if(isset($_POST['email']) and isset($_POST['password'])){
+        if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['password-confirmation'])){
             try{
-                AuthnProvider::signin($_POST['email'],$_POST['password']) ;
+                AuthnProvider::register($_POST['email'],$_POST['password'],$_POST['password-confirmation']) ;
+                $ret .= '<p>Vous etes inscrit !</p>' ;
             } catch (\Exception $e){
-                $ret .= 'non reconnu' ;
+                $ret .= $e->getMessage() ;
+                $ret .= '<li><a href="index.php?action=signin">réessayer</a></li>' ;
             }
             
         } else {
@@ -25,11 +27,11 @@ class SigninAction extends Action {
             <br>
 
             <label for="password">Mot de passe: </label>
-            <input type="text" id="password" name="password" required>
+            <input type="password" id="password" name="password" required>
             <br>
 
             <label for="password-confirmation">Confirmation du mot de passe: </label>
-            <input type="text" id="password-confirmation" name="password-confirmation" required><br>
+            <input type="password" id="password-confirmation" name="password-confirmation" required><br>
             <br>
 
             <button type="submit">Ajouter</button>

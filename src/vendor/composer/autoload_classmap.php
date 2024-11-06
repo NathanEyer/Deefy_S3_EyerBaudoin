@@ -15,6 +15,7 @@ return array(
     'iutnc\\deefy\\action\\DisplayAllTrackAction' => $baseDir . '/classes/action/DisplayAllTrackAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistAction' => $baseDir . '/classes/action/DisplayPlaylistAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistsAction' => $baseDir . '/classes/action/DisplayPlaylistsAction.php',
+    'iutnc\\deefy\\action\\LogOutAction' => $baseDir . '/classes/action/LogOutAction.php',
     'iutnc\\deefy\\action\\LoginAction' => $baseDir . '/classes/action/LoginAction.php',
     'iutnc\\deefy\\action\\SigninAction' => $baseDir . '/classes/action/SigninAction.php',
     'iutnc\\deefy\\audio\\lists\\Album' => $baseDir . '/classes/audio/lists/Album.php',

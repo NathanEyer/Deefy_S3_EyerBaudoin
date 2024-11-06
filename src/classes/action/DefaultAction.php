@@ -10,11 +10,9 @@ class DefaultAction extends Action {
 
         $ret = "" ;
 
-        try{
-            $r = DeefyRepository::getInstance() ;
-            $ret .= "Connexion reussie" ;
-        } catch(\Exception $e) {
-            $ret .= "ERR CONNEXION DB" ;
+        if (isset($_SESSION['email'])){
+            $ret .= '<p>Vous etes connectés avec '.$_SESSION['email'].'</p>';
+
         }
 
         $ret .= '<h1>Bienvenue sur deefy</h1>
@@ -22,6 +20,9 @@ class DefaultAction extends Action {
     <li><a href="index.php?action=show-playlist">Afficher la playlist courante</a></li>
     <li><a href="index.php?action=show-playlists">Afficher toutes les playlists</a></li>
     <li><a href="index.php?action=show-tracks">Afficher tte les tracks</a></li>
+    <li><a href="index.php?action=signin">s\'inscrire</a></li>
+    <li><a href="index.php?action=login">Se connecter</a></li>
+    <li><a href="index.php?action=logout">Se deconnecter</a></li>
     <li>
         <form action="index.php?action=add-playlist" method="POST">
             <label for="nom">Nouvelle playlist:</label>

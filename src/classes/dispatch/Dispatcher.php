@@ -11,6 +11,8 @@ use iutnc\deefy\action\DisplayPlaylistAction;
 use iutnc\deefy\action\DisplayPlaylistsAction;
 use iutnc\deefy\action\DisplayAllTrackAction;
 use iutnc\deefy\action\SigninAction;
+use iutnc\deefy\action\LoginAction;
+use iutnc\deefy\action\LogOutAction;
 
 
 class Dispatcher
@@ -47,6 +49,12 @@ class Dispatcher
                 break;
             case 'signin':
                 $html = (new SigninAction())->execute();
+                break;
+            case 'login':
+                $html = (new LoginAction())->execute();
+                break;
+            case 'logout':
+                $html = (new LogOutAction())->execute();
                 break;
             default :
                 $html = (new DefaultAction)->execute();

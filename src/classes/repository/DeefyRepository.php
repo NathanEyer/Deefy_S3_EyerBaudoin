@@ -111,7 +111,7 @@ class DeefyRepository
     // Renvoie un array de AudioTrack
     public function findAllTrack(): array {
 
-        $query = "select titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
+        $query = "select id,titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
         $stmt = $this->pdo->prepare($query) ;
         $stmt->execute() ;
 
@@ -119,7 +119,7 @@ class DeefyRepository
         $result = $stmt->fetch() ;
         while($result!=null){
             if($result['artiste_album']!=null){
-                $a[] = new AlbumTrack($result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
+                $a[] = new AlbumTrack($result['id'],$result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
             $result = $stmt->fetch() ;
         }
 
@@ -127,7 +127,7 @@ class DeefyRepository
     }
 
     public function getUserByEmail(string $email): array {
-        $query = "SELECT * FROM User WHERE email = :email";
+        $query = "select * from deefy_user where email = :email";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute(['email' => $email]);
 
@@ -140,7 +140,7 @@ class DeefyRepository
     }
 
     public function getUserByID(string $id): array {
-        $query = "SELECT * FROM deefy_user WHERE id = :id";
+        $query = "select * from deefy_user where id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute(['id' => $id]);
 
@@ -153,11 +153,11 @@ class DeefyRepository
     }
 
 
-    public function addUser(string $email, string $hash, int $role) {
-        $query = "INSERT INTO User (email, passwd, role) VALUES (:email, :passwd, :role)";
+    public function addUser(string $email, string $hash) {
+        $query = "insert into deefy_user (email, passwd, role) values (:email, :passwd, :role)";
         $stmt = $this->pdo->prepare($query);
 
-        $stmt->execute(['email' => $email, 'passwd' => $hash, 'role' => $role]);
+        $stmt->execute(['email' => $email, 'passwd' => $hash, 'role' => 1]);
     }
 
     public function asPermission(string $id, string $perm): bool {

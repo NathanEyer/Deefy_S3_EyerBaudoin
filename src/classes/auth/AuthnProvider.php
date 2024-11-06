@@ -7,57 +7,58 @@ use iutnc\deefy\repository\DeefyRepository;
 
 class AuthnProvider {
 
-    public static function signin(string $email, string $passwd2check){
+    public static function login(string $email, string $passwd2check){
 
         $r = DeefyRepository::getInstance();
 
         try {
             $userData = $r->getUserByEmail($email);
-
-            if (empty($userInfo)) {
-                return "Erreur de connexion, mot de passe ou email incorrect";
-            }
-
         } catch (\Exception $e) {
-            return "Erreur de connexion, mot de passe ou email incorrect";
+            throw new AuthnException("Erreur de connexion, mot de passe ou email incorrect");
         }
 
         $hash = $userData['passwd'];
 
         if (!password_verify($passwd2check, $hash)) {
-            return "Erreur de connexion, mot de passe ou email incorrect";
+            throw new AuthnException("Erreur de connexion, mot de passe ou email incorrect");
         } else {
-            $_SESSION['user'] = $userData['id'];
-            return "Connexion réussie";
+            $_SESSION['id'] = $userData['id'];
+            $_SESSION['email'] = $userData['email'];
+            $_SESSION['hash'] = $userData['passwd'];
         }
     }
 
-    public static function register(string $email, string $password){
+    public static function register(string $email, string $password, string $password_confirmation){
 
         $r = DeefyRepository::getInstance();
 
-        /* ACCOUNT VALIDATION */
         try {
-            if($r->getUserByEmail($email) != null)
-                throw new AuthnException(" error : user already exists");
-        } catch (\Exception $e) {
-            throw new AuthnException(" error : user already exists");
-        }
+        	$r->getUserByEmail($email) ;
+        } catch(\Exception $e){
 
-        if (! filter_var($email, FILTER_VALIDATE_EMAIL))
-            throw new AuthnException(" error : invalid user email");
 
-        if (strlen($password) < 10)
-            throw new AuthnException(" error : password too short");
+	        if (! filter_var($email, FILTER_VALIDATE_EMAIL))
+	            throw new AuthnException("Le mail est incorrect");
 
-        if (! preg_match('/[A-Z]/', $password))
-            throw new AuthnException(" error : password must contain at least one uppercase letter");
+	        if (strlen($password) < 10)
+	            throw new AuthnException("Le mot de passe est trop court");
 
-        $hash = password_hash($password, PASSWORD_DEFAULT, ['cost'=>12]);
-        $r->addUser($email, $hash, 1);
+	        if (! preg_match('/[A-Z]/', $password))
+	            throw new AuthnException("Le mot de passe doit contenir une majuscule");
+
+	        if ($password != $password_confirmation)
+	        	throw new AuthnException("Les 2 mdp doivent correspondre") ;
+
+	        $hash = password_hash($password, PASSWORD_DEFAULT, ['cost'=>12]);
+	        $r->addUser($email, $hash, 1);
+
+	        return ;
+	    }
+
+	    throw new AuthnException("Le mail est deja utilisé");
     }
 
-    public static function signout(){
+    public static function logout(){
         session_destroy();
     }
 

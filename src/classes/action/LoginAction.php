@@ -13,19 +13,22 @@ class LoginAction extends Action {
 
         if(isset($_POST['email']) and isset($_POST['password'])){
             try{
-                AuthnProvider::signin($_POST['email'],$_POST['password']) ;
+                AuthnProvider::login($_POST['email'],$_POST['password']) ;
+                $ret .= '<p>Vous etes connecté avec '.$_SESSION['email'].'</p>' ;
+
             } catch (\Exception $e){
-                // l'utilisateur n'est pas reconnu
+                $ret .= '<p>les identifiants ne sont pas reconnu</p>' ;
+                $ret .= $e->getMessage() ;
             }
             
         } else {
-            $ret .= '<form action="index.php?action=signin" method="POST"><strong>S\'enregistrer</strong></br>
+            $ret .= '<form action="index.php?action=login" method="POST"><strong>S\'enregistrer</strong></br>
             <label for="email">E-mail: </label>
             <input type="text" id="email" name="email" required>
             <br>
 
             <label for="password">Mot de passe: </label>
-            <input type="text" id="password" name="password" required>
+            <input type="password" id="password" name="password" required>
             <br>
 
             <button type="submit">se connecter</button>

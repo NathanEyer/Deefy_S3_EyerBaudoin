@@ -16,6 +16,7 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'iutnc\\deefy\\action\\DisplayAllTrackAction' => __DIR__ . '/../..' . '/classes/action/DisplayAllTrackAction.php',
         'iutnc\\deefy\\action\\DisplayPlaylistAction' => __DIR__ . '/../..' . '/classes/action/DisplayPlaylistAction.php',
         'iutnc\\deefy\\action\\DisplayPlaylistsAction' => __DIR__ . '/../..' . '/classes/action/DisplayPlaylistsAction.php',
+        'iutnc\\deefy\\action\\LogOutAction' => __DIR__ . '/../..' . '/classes/action/LogOutAction.php',
         'iutnc\\deefy\\action\\LoginAction' => __DIR__ . '/../..' . '/classes/action/LoginAction.php',
         'iutnc\\deefy\\action\\SigninAction' => __DIR__ . '/../..' . '/classes/action/SigninAction.php',
         'iutnc\\deefy\\audio\\lists\\Album' => __DIR__ . '/../..' . '/classes/audio/lists/Album.php',
