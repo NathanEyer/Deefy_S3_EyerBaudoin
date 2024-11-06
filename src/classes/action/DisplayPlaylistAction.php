@@ -17,12 +17,6 @@ class DisplayPlaylistAction extends Action
     public function execute(): string
     {
 
-        //Vérifie que des playlists sont enregistrées
-        if (empty($_SESSION['playlist'])) {
-            return "<br><div style='text-align: center; font-size: 25px'> Playlist introuvable</div>";
-        }
-
-
         if(isset($_GET['playlistID'])){
 
             $r = DeefyRepository::getInstance() ;

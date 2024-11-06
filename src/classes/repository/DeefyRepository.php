@@ -90,7 +90,7 @@ class DeefyRepository
         return $pl;
     }
 
-    public function addTrackPlaylist(Playlist $pl, AudioTrack $ad): void {
+    public function addTrackPlaylist(string $pl, AudioTrack $ad): void {
         $query = "Insert into playlist2track (playlist_id, track_id) values (:playlist_id :track_id)";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
