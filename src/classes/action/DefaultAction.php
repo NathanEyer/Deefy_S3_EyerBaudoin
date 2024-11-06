@@ -57,6 +57,10 @@ class DefaultAction extends Action {
             <label for="podcast-sort">Genre: </label>
             <input type="text" id="podcast-sort" name="podcast-sort" required>
             <button type="submit">Ajouter</button>
+            
+            <label for="podcast-playlist">Playlist: </label>
+            <input type="text" id="podcast-playlist" name="podcast-playlist" required>
+            <button type="submit">Ajouter</button>
         </form>
     </li>
     <li>
@@ -85,9 +89,13 @@ class DefaultAction extends Action {
             <label for="album" id="album">Nom de l\'album: </label>
             <input type="text" id="album" name="album" required>
             <button type="submit">Ajouter</button>
+            
+            <label for="album-playlist">Playlist: </label>
+            <input type="text" id="album-playlist" name="album-playlist" required>
+            <button type="submit">Ajouter</button>
             </form>
-            </li>
-            </ul>';
+        </li>
+    </ul>';
 
             return $ret ;
     }
