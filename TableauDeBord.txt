@@ -1,0 +1,13 @@
+Fonctionnalités réalisées: 
+- Création/suppression d'une playlist, d'un AlbumTrack ou d'un PodcastTrack
+- Affichage de la playlist courante, de toutes les playlists
+- Affichage de tous les sons AlbumTrack ou PodcastTrack
+- Possibilité de créer un compte, se connecter, s'identifier
+- Accès à une base de données en ligne, avec des sons de base
+
+-> Nous avons mis en place des rôles, mais avons finalement décidés de laisser toutes les permissions à tous les utilisateurs d'ajouter et de supprimer des sons. Nous avons eu quelques soucis de gestion des rôles et avont donc décidés de vous proposer quelque chose de fonctionnel et non bancal.
+
+Voici donc le lien git: https://github.com/NathanEyer/Deefy_S3_EyerBaudoin 
+Et voici le lien du site: http://deefy.rf.gd/index.php
+
+Nathan Eyer / Mathieu Baudoin
