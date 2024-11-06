@@ -9,11 +9,11 @@ class LogOutAction extends Action {
 
     public function execute(): string {
 
-        $ret = "" ;
+        $ret = '<div style="text-align: center;">';
 
         AuthnProvider::logout() ;
 
-        $ret .= "<p>Vous etes deconnecté</p>" ;
+        $ret .= "<p><strong style='font-size: 24px'> Vous êtes déconnecté.</p>" ;
 
         return $ret ;
     }

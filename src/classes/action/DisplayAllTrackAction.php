@@ -13,7 +13,7 @@ class DisplayAllTrackAction extends Action {
             $r = DeefyRepository::getInstance() ;
 
             $a = $r->findAllTrack() ;
-            $ret = "" ;
+            $ret = '<br><div style="text-align: left;">';
 
             foreach ($a as $track) {
                 $renderer = new AlbumTrackRenderer($track) ;
