@@ -1,6 +1,7 @@
 <?php
 
 namespace iutnc\deefy\action;
+use iutnc\deefy\audio\lists\Playlist;
 use iutnc\deefy\repository\DeefyRepository;
 
 class DelPlaylistAction extends Action
@@ -15,6 +16,7 @@ class DelPlaylistAction extends Action
 
         //Crée la playlist
         $r->delPlaylistByName($nom);
+        $_SESSION['playlist'] = null;
 
         return "Playlist $nom supprimée";
     }
