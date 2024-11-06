@@ -29,7 +29,6 @@ class AddAlbumTrackAction extends Action
         //Ajoute
         $r = DeefyRepository::getInstance() ;
         $r->addTrackPlaylist($playlist, $piste);
-        $r->saveTrack($piste);
 
         return "AlbumTrack '$title' ajouté à la playlist";
     }
