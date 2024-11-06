@@ -14,17 +14,17 @@ class AddAlbumTrackAction extends Action
         $playlist = end($_SESSION['playlists']);
 
         //Nettoye chaque valeurs donnés dans le formulaire
-        $title = filter_input(INPUT_POST, 'album-title', FILTER_SANITIZE_STRING);
-        $fileName = filter_input(INPUT_POST, 'album-fileName', FILTER_SANITIZE_STRING);
-        $artist = filter_input(INPUT_POST, 'album-artist', FILTER_SANITIZE_STRING);
-        $year = filter_input(INPUT_POST, 'album-year', FILTER_SANITIZE_STRING);
-        $sort = filter_input(INPUT_POST, 'album-sort', FILTER_SANITIZE_STRING);
-        $time = filter_input(INPUT_POST, 'album-time', FILTER_SANITIZE_STRING);
-        $trackNumber = filter_input(INPUT_POST, 'album-trackNumber', FILTER_SANITIZE_STRING);
-        $album = filter_input(INPUT_POST, 'album', FILTER_SANITIZE_STRING);
+        $title = filter_input(INPUT_POST, 'album-title', FILTER_DEFAULT);
+        $fileName = filter_input(INPUT_POST, 'album-fileName', FILTER_DEFAULT);
+        $artist = filter_input(INPUT_POST, 'album-artist', FILTER_DEFAULT);
+        $year = filter_input(INPUT_POST, 'album-year', FILTER_DEFAULT);
+        $sort = filter_input(INPUT_POST, 'album-sort', FILTER_DEFAULT);
+        $time = filter_input(INPUT_POST, 'album-time', FILTER_DEFAULT);
+        $trackNumber = filter_input(INPUT_POST, 'album-trackNumber', FILTER_DEFAULT);
+        $album = filter_input(INPUT_POST, 'album', FILTER_DEFAULT);
 
         //Crée le podcast
-        $piste = new AlbumTrack($title, $artist, $sort, $time, $fileName, $year, $album, $trackNumber);
+        $piste = new AlbumTrack(0, $title, $artist, $sort, (int)$time, $fileName, (int)$year, $album, (int)$trackNumber);
 
         //Ajoute
         end($_SESSION['playlists'])->addTrack($piste);

@@ -7,6 +7,7 @@ namespace iutnc\deefy\audio\tracks;
  */
 class PodcastTrack extends AudioTrack{
     /**
+     * @param int $id
      * @param string $title
      * @param string $artist
      * @param string $sort
@@ -14,8 +15,8 @@ class PodcastTrack extends AudioTrack{
      * @param string $fileName
      * @param int $year
      */
-    public function __construct(string $title, string $artist, string $sort, int $time, string $fileName, int $year) {
-        parent::__construct($title, $artist, $sort, $time, $fileName, $year);
+    public function __construct(int $id, string $title, string $artist, string $sort, int $time, string $fileName, int $year) {
+        parent::__construct($id, $title, $artist, $sort, $time, $fileName, $year);
     }
 
     /**

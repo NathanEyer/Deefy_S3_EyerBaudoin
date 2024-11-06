@@ -15,15 +15,15 @@ class AddPodcastTrackAction extends Action
         $playlist = end($_SESSION['playlists']);
 
         //Nettoye chaque valeurs donnés dans le formulaire
-        $title = filter_input(INPUT_POST, 'podcast-title', FILTER_SANITIZE_STRING);
-        $fileName = filter_input(INPUT_POST, 'podcast-fileName', FILTER_SANITIZE_STRING);
-        $artist = filter_input(INPUT_POST, 'podcast-artist', FILTER_SANITIZE_STRING);
-        $year = filter_input(INPUT_POST, 'podcast-year', FILTER_SANITIZE_STRING);
-        $sort = filter_input(INPUT_POST, 'podcast-sort', FILTER_SANITIZE_STRING);
-        $time = filter_input(INPUT_POST, 'podcast-time', FILTER_SANITIZE_STRING);
+        $title = filter_input(INPUT_POST, 'podcast-title', FILTER_DEFAULT);
+        $fileName = filter_input(INPUT_POST, 'podcast-fileName', FILTER_DEFAULT);
+        $artist = filter_input(INPUT_POST, 'podcast-artist', FILTER_DEFAULT);
+        $year = filter_input(INPUT_POST, 'podcast-year', FILTER_DEFAULT);
+        $sort = filter_input(INPUT_POST, 'podcast-sort', FILTER_DEFAULT);
+        $time = filter_input(INPUT_POST, 'podcast-time', FILTER_DEFAULT);
 
         //Crée le podcast
-        $piste = new PodcastTrack($title, $artist, $sort, $time, $fileName, $year);
+        $piste = new PodcastTrack(0, $title, $artist, $sort, (int)$time, $fileName, (int)$year);
 
         //Ajoute
         end($_SESSION['playlists'])->addTrack($piste);

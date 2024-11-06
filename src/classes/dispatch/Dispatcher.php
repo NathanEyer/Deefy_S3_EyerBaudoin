@@ -7,6 +7,7 @@ use iutnc\deefy\action\AddAlbumTrackAction;
 use iutnc\deefy\action\AddPlaylistAction;
 use iutnc\deefy\action\AddPodcastTrackAction;
 use iutnc\deefy\action\DefaultAction;
+use iutnc\deefy\action\DelPlaylistAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
 use iutnc\deefy\action\DisplayPlaylistsAction;
 use iutnc\deefy\action\DisplayAllTrackAction;
@@ -26,9 +27,6 @@ class Dispatcher
 
     public function run(): void{
         switch($this->action){
-            case 'default':
-                $html = (new DefaultAction)->execute();
-                break;
             case 'show-playlist':
                 $html = (new DisplayPlaylistAction())->execute();
                 break;
@@ -50,11 +48,16 @@ class Dispatcher
             case 'signin':
                 $html = (new SigninAction())->execute();
                 break;
+<<<<<<< HEAD
             case 'login':
                 $html = (new LoginAction())->execute();
                 break;
             case 'logout':
                 $html = (new LogOutAction())->execute();
+=======
+            case 'delete-playlist':
+                $html = (new DelPlaylistAction())->execute();
+>>>>>>> 75aaea3b750e3ebfc9faf34c4cb0eb7cdb810367
                 break;
             default :
                 $html = (new DefaultAction)->execute();

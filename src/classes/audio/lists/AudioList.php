@@ -50,16 +50,16 @@ class AudioList implements Iterator{
         throw new InvalidPropertyNameException("invalid property : $name");
     }
 
-    public function current(){
+    public function current() : mixed{
         return $this->tracksList[$this->position];
     }
 
-    public function next(){
-        return $this->tracksList[$this->position++];
+    public function next(): void{
+        $this->position++;
     }
 
-    public function key(){
-        return $this->tracksList[$this->position];
+    public function key(): int{
+        return $this->position;
     }
 
     public function valid(): bool{
