@@ -48,16 +48,17 @@ class Dispatcher
             case 'signin':
                 $html = (new SigninAction())->execute();
                 break;
-<<<<<<< HEAD
+
             case 'login':
                 $html = (new LoginAction())->execute();
                 break;
             case 'logout':
                 $html = (new LogOutAction())->execute();
-=======
+                break;
+
             case 'delete-playlist':
                 $html = (new DelPlaylistAction())->execute();
->>>>>>> 75aaea3b750e3ebfc9faf34c4cb0eb7cdb810367
+
                 break;
             default :
                 $html = (new DefaultAction)->execute();
