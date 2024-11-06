@@ -17,7 +17,7 @@ class DisplayPlaylistAction extends Action
             return "Playlist introuvables";
         }
 
-        $playlist = $_SESSION['playlist'];
+        $playlist = unserialize($_SESSION['playlist']);
 
         //Affiche le render des sons
         $html = "<strong>{$playlist->name}</strong></br>";

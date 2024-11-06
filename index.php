@@ -20,7 +20,6 @@
 
 <?php
 session_start();
-
 require_once 'src/vendor/autoload.php';
 use iutnc\deefy\dispatch\Dispatcher ;
 use iutnc\deefy\repository\DeefyRepository ;

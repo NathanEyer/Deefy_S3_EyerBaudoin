@@ -24,7 +24,7 @@ class AddPlaylistAction extends Action
         }
 
         //Ajoute la playlist en session
-        $_SESSION['playlist'] = $pl;
+        $_SESSION['playlist'] = serialize($pl);
 
         return "Nouvelle playlist: {$nom}";
     }
