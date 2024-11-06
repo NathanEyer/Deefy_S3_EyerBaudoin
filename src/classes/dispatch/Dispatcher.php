@@ -10,7 +10,7 @@ use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DelPlaylistAction;
 use iutnc\deefy\action\DisplayAllPodcastAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
-use iutnc\deefy\action\DisplayPlaylistsAction;
+use iutnc\deefy\action\DisplayAllPlaylistAction;
 use iutnc\deefy\action\DisplayAllTrackAction;
 use iutnc\deefy\action\SigninAction;
 use iutnc\deefy\action\LoginAction;
@@ -32,7 +32,7 @@ class Dispatcher
                 $html = (new DisplayPlaylistAction())->execute();
                 break;
             case 'show-playlists':
-                $html = (new DisplayPlaylistsAction())->execute();
+                $html = (new DisplayAllPlaylistAction())->execute();
                 break;
             case 'add-playlist':
                 $html = (new AddPlaylistAction())->execute();

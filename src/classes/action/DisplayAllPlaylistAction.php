@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace iutnc\deefy\action;
 use iutnc\deefy\repository\DeefyRepository;
 
-class DisplayPlaylistsAction extends Action
+class DisplayAllPlaylistAction extends Action
 {
     public function execute(): string
     {
@@ -15,7 +15,7 @@ class DisplayPlaylistsAction extends Action
         $html = "<ul>";
         foreach ($playlists as $playlist) {
             $nom = $playlist->name;
-            $html .= "<li><a href=\"index.php?action=show-playlist&nom=$nom\">" . $nom . "</a></li>";
+            $html .= "<li><a href=index.php?action=show-playlist&playlistID={$playlist->getID()}>" . $nom . "</a></li>";
         }
         return $html .= "</ul>";
     }

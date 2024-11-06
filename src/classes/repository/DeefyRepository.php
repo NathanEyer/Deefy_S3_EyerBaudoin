@@ -70,7 +70,6 @@ class DeefyRepository
             return new Playlist($result['id'], $result['nom']);
         }
         return null;
-
     }
 
     public function delPlaylistByName(string $nom): void{
@@ -89,40 +88,6 @@ class DeefyRepository
 
         $pl->setID($this->pdo->lastInsertId()+1);
         return $pl;
-    }
-
-    public function saveTrack(AudioTrack $aT):void {
-        if($aT instanceof PodcastTrack){
-            $query = 'INSERT INTO track (id, titre, genre, duree, fileName, auteur_podcast, date_podcast, type) 
-          VALUES (:id, :title, :sort, :time, :fileName, :artist, :year, :type)';
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'id' => $aT->id,
-                'title' => $aT->title,
-                'sort' => $aT->sort,
-                'time' => $aT->time,
-                'fileName' => $aT->fileName,
-                'artist' => $aT->artist,
-                'year' => $aT->year,
-                'type' => 'P'
-            ]);
-        }else{
-            $query = 'INSERT INTO track (id, titre, artiste_album, genre, duree, fileName, annee_album, numero_album) 
-          VALUES (:id, :title, :artist, :sort, :time, :fileName, :year, :album, :trackNumber)';
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'id' => $aT->id,
-                'title' => $aT->title,
-                'artist' => $aT->artist,
-                'sort' => $aT->sort,
-                'time' => $aT->time,
-                'fileName' => $aT->fileName,
-                'year' => $aT->year,
-                'album' => $aT->album,
-                'trackNumber' => $aT->trackNumber,
-                'type' => 'A'
-            ]);
-        }
     }
 
     public function addTrackPlaylist(Playlist $pl, AudioTrack $ad): void {
@@ -151,9 +116,32 @@ class DeefyRepository
 
             $result = $stmt->fetch() ;
         }
-
         return $a ;
     }
+
+    // Renvoie un array de AudioTrack appartenant a une playlist
+    public function findAllTrackByPlaylistID(int $playlistID): array {
+
+        $query = "select id,titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album 
+                    from track
+                    inner join playlist2track on track.id = playlist2track.id_track
+                    where playlist2track.id_pl = :playlistID" ;
+
+        $stmt = $this->pdo->prepare($query) ;
+        $stmt->execute(['playlistID' => $playlistID]) ;
+
+        $a = [] ;
+        $result = $stmt->fetch() ;
+        while($result!=null){
+            if($result['artiste_album']!==null){
+
+                $a[] = new AlbumTrack($result['id'],$result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
+
+            $result = $stmt->fetch() ;
+        }
+        return $a ;
+    }
+
 
     public function findAllPodcast(): array {
 

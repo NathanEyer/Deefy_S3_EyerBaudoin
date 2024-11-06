@@ -14,6 +14,13 @@ class DefaultAction extends Action {
             $ret .= '<p style="text-align: center;">Vous êtes connecté avec ' . $_SESSION['email'] . '</p>';
         }
 
+        if (isset($_SESSION['currPlaylistID'])) {
+            $r = DeefyRepository::getInstance() ;
+            $pl = $r-> findPlaylistById($_SESSION['currPlaylistID']) ;
+            $ret .= '<p style="text-align: center;">Vous écoutez ' . $pl->__get('name') . '</p>';
+        }
+
+
         // Contenu principal
         $ret .= '<h1 style="text-align: center;">Bienvenue sur deefy</h1>
         <div style="max-width:900px; margin: auto; display: flex;">
