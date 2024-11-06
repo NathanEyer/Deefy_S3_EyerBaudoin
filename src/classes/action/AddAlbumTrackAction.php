@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace iutnc\deefy\action;
 
 use iutnc\deefy\audio\tracks\AlbumTrack;
+use iutnc\deefy\repository\DeefyRepository;
 
 class AddAlbumTrackAction extends Action
 {
@@ -22,12 +23,14 @@ class AddAlbumTrackAction extends Action
         $time = filter_input(INPUT_POST, 'album-time', FILTER_DEFAULT);
         $trackNumber = filter_input(INPUT_POST, 'album-trackNumber', FILTER_DEFAULT);
         $album = filter_input(INPUT_POST, 'album', FILTER_DEFAULT);
+        $playlist = filter_input(INPUT_POST, 'album-playlist', FILTER_DEFAULT);
 
         //Crée le podcast
         $piste = new AlbumTrack(0, $title, $artist, $sort, (int)$time, $fileName, (int)$year, $album, (int)$trackNumber);
 
         //Ajoute
-        end($_SESSION['playlists'])->addTrack($piste);
+        $r = DeefyRepository::getInstance() ;
+
         return "AlbumTrack '$title' ajouté à la playlist";
     }
 }
