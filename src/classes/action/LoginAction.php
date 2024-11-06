@@ -2,41 +2,38 @@
 
 namespace iutnc\deefy\action;
 
-use iutnc\deefy\repository\DeefyRepository ;
-use iutnc\deefy\auth\AuthnProvider ;
+use iutnc\deefy\repository\DeefyRepository;
+use iutnc\deefy\auth\AuthnProvider;
 
 class LoginAction extends Action {
 
     public function execute(): string {
 
-        $ret = "<h1>Page pour se connecter</h1>" ;
+        $ret = '<div style="text-align: center;">';
 
-        if(isset($_POST['email']) and isset($_POST['password'])){
-            try{
-                AuthnProvider::login($_POST['email'],$_POST['password']) ;
-                $ret .= '<p>Vous etes connecté avec '.$_SESSION['email'].'</p>' ;
-
-            } catch (\Exception $e){
-                $ret .= '<p>les identifiants ne sont pas reconnu</p>' ;
-                $ret .= $e->getMessage() ;
+        if (isset($_POST['email']) && isset($_POST['password'])) {
+            try {
+                AuthnProvider::login($_POST['email'], $_POST['password']);
+                $ret .= '<p>Vous êtes connecté avec ' . htmlspecialchars($_SESSION['email']) . '</p>';
+            } catch (\Exception $e) {
+                $ret .= '<p style="color: red;">Les identifiants ne sont pas reconnus.</p>';
+                $ret .= '<p>' . htmlspecialchars($e->getMessage()) . '</p>';
             }
-            
         } else {
-            $ret .= '<form action="index.php?action=login" method="POST"><strong>S\'enregistrer</strong></br>
-            <label for="email">E-mail: </label>
-            <input type="text" id="email" name="email" required>
-            <br>
+            $ret .= '<form action="index.php?action=login" method="POST">
+                        <br><strong style="font-size: 30px;">Se connecter</strong><br><br>
+                        <label for="email" style="font-size: 25px;">E-mail: </label>
+                        <input type="text" id="email" name="email" required><br>
 
-            <label for="password">Mot de passe: </label>
-            <input type="password" id="password" name="password" required>
-            <br>
+                        <label for="password" style="font-size: 25px;">Mot de passe: </label>
+                        <input type="password" id="password" name="password" required><br><br>
 
-            <button type="submit">se connecter</button>
-            </form>' ;
+                        <button type="submit" style="font-size: 25px;">Se connecter !</button>
+                    </form>';
         }
 
-        return $ret ;
+        $ret .= '</div>';
+        return $ret;
     }
 }
-
 ?>

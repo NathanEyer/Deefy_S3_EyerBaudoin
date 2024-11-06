@@ -26,12 +26,12 @@ class AlbumTrackRenderer extends AudioTrackRenderer
     {
         $t = $this->track;
         return "\"$t->fileName\" type=\"audio/mpeg\" />"
-            . "<p> Votre navigateur ne prend pas en charge l'audio HTML5. Voici un"
+            . "<p>Votre navigateur ne prend pas en charge l'audio HTML5. Voici un"
             . "<a href=\"$t->fileName\">lien vers le fichier audio</a> à la place."
             . "</p></audio>"
-            . $t->trackNumber . ") " . $t->title . "(" . $t->sort . ")"
-            . " en " . $t->year . " par " . $t->artist
-            . " de l'album " . $t->album . " d'une durée de "
+            . $t->trackNumber . ") " . $t->title . " (" . $t->sort . ") "
+            . "en " . $t->year . " par " . $t->artist . " "
+            . "de l'album " . $t->album . " d'une durée de "
             . $t->time . "s";
     }
 

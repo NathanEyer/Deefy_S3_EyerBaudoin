@@ -17,7 +17,7 @@ class DisplayAllPodcastAction extends Action
             $r = DeefyRepository::getInstance() ;
 
             $a = $r->findAllPodcast() ;
-            $ret = "" ;
+            $ret = '<br><div style="text-align: left;">';
 
             foreach ($a as $track) {
                 $renderer = new PodcastRenderer($track) ;
@@ -30,3 +30,5 @@ class DisplayAllPodcastAction extends Action
         }
     }
 }
+
+?>

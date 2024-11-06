@@ -11,7 +11,7 @@ class AddPodcastTrackAction extends Action
     public function execute(): string
     {
         //Vérifie l'existence de playlists
-        if(empty($_SESSION['playlist'])) {return "Playlist inexistante";}
+        if(empty($_SESSION['playlist'])) {return "<br><div style='text-align: center; font-size: 25px'> Playlist introuvable</div>";}
 
 
         //Nettoye chaque valeurs donnés dans le formulaire
