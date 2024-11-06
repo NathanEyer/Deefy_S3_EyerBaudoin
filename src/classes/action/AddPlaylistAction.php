@@ -23,13 +23,8 @@ class AddPlaylistAction extends Action
             return "Playlist déjà existante";
         }
 
-        //Crée le tableau en sessions
-        if(!isset($_SESSION['playlists'])) {
-            $_SESSION['playlists'] = [];
-        }
-
         //Ajoute la playlist en session
-        $_SESSION['playlists'][] = $pl;
+        $_SESSION['playlist'] = $pl;
 
         return "Nouvelle playlist: {$nom}";
     }
