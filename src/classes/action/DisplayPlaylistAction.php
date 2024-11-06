@@ -13,14 +13,11 @@ class DisplayPlaylistAction extends Action
     public function execute(): string
     {
         //Vérifie que des playlists sont enregistrées
-        if (empty($_SESSION['playlists'])) {
-            return "Playlists introuvables";
+        if (empty($_SESSION['playlist'])) {
+            return "Playlist introuvables";
         }
 
-        $playlist = end($_SESSION['playlists']);
-
-        //Vérifie que celle-ci n'est pas vide
-        if (empty($playlist)) return "Playlist vide";
+        $playlist = $_SESSION['playlist'];
 
         //Affiche le render des sons
         $html = "<strong>{$playlist->name}</strong></br>";
