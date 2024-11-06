@@ -19,8 +19,10 @@ class DisplayPlaylistAction extends Action
 
         $playlist = unserialize($_SESSION['playlist']);
 
+        if(isset($_GET['nom'])){$name = $_GET['nom'];}else{$name = $playlist->name;}
+
         //Affiche le render des sons
-        $html = "<strong>{$_GET["nom"]}</strong></br>";
+        $html = "<strong>{$name}</strong></br>";
         foreach ($playlist->tracksList as $track) {
             if($track instanceof PodcastTrack){
                 $r = new PodcastRenderer($track);

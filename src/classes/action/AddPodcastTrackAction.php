@@ -29,6 +29,7 @@ class AddPodcastTrackAction extends Action
 
         $r = DeefyRepository::getInstance() ;
         $r->addTrackPlaylist($playlist, $piste);
+        $r->saveTrack($piste);
 
         //Ajoute
         return "PodcastTrack '$title' ajouté à la playlist";

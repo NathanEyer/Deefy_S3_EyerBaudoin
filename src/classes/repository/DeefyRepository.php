@@ -91,7 +91,7 @@ class DeefyRepository
         return $pl;
     }
 
-    public function saveTrack(AudioTrack $aT) {
+    public function saveTrack(AudioTrack $aT):void {
         if($aT instanceof PodcastTrack){
             $query = 'INSERT INTO track (id, titre, genre, duree, fileName, auteur_podcast, date_podcast, type) 
           VALUES (:id, :title, :sort, :time, :fileName, :artist, :year, :type)';
