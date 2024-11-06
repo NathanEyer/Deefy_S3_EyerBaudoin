@@ -13,7 +13,6 @@ require_once 'src/vendor/autoload.php';
 use iutnc\deefy\dispatch\Dispatcher ;
 use iutnc\deefy\repository\DeefyRepository ;
 session_start();
-
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);

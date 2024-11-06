@@ -5,6 +5,7 @@ namespace iutnc\deefy\repository;
 use iutnc\deefy\audio\lists\Playlist;
 use iutnc\deefy\audio\tracks\AlbumTrack ;
 use iutnc\deefy\audio\tracks\AudioTrack;
+use iutnc\deefy\audio\tracks\PodcastTrack;
 
 class DeefyRepository
 {
@@ -72,34 +73,59 @@ class DeefyRepository
 
     }
 
+    public function delPlaylistByName(string $nom): void{
+        $query = 'Delete from playlist where nom = :nom';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['nom' => $nom]);
+    }
 
-    public function saveEmptyPlaylist(Playlist $pl): Playlist {
-
+    public function saveEmptyPlaylist(Playlist $pl): Playlist|null {
+        foreach($this->findAllPlaylist() as $playlist){
+            if($playlist->name == $pl->name){return null;}
+        };
         $query = "Insert into playlist (nom) values (:nom)";
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute(['nom' => $pl->nom]);
+        $stmt->execute(['nom' => $pl->name]);
 
-        $pl->setID($this->pdo->lastInsertId());
+        $pl->setID($this->pdo->lastInsertId()+1);
         return $pl;
     }
 
     public function saveTrack(AudioTrack $aT) {
-
-        $query = 'INSERT INTO track (titre, genre, duree, fileName, artiste_album, annee_album) 
-          VALUES (:title, :sort, :time, :fileName, :artist, :year)';
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([
-            'title' => $aT->title,
-            'sort' => $aT->sort,
-            'time' => $aT->time,
-            'fileName' => $aT->fileName,
-            'artist' => $aT->artist,
-            'year' => $aT->year
-        ]);
+        if($aT instanceof PodcastTrack){
+            $query = 'INSERT INTO track (id, titre, genre, duree, fileName, auteur_podcast, date_podcast, type) 
+          VALUES (:id, :title, :sort, :time, :fileName, :artist, :year, :type)';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                'id' => $aT->id,
+                'title' => $aT->title,
+                'sort' => $aT->sort,
+                'time' => $aT->time,
+                'fileName' => $aT->fileName,
+                'artist' => $aT->artist,
+                'year' => $aT->year,
+                'type' => 'P'
+            ]);
+        }else{
+            $query = 'INSERT INTO track (id, titre, artiste_album, genre, duree, fileName, annee_album, numero_album) 
+          VALUES (:id, :title, :artist, :sort, :time, :fileName, :year, :album, :trackNumber)';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                'id' => $aT->id,
+                'title' => $aT->title,
+                'artist' => $aT->artist,
+                'sort' => $aT->sort,
+                'time' => $aT->time,
+                'fileName' => $aT->fileName,
+                'year' => $aT->year,
+                'album' => $aT->album,
+                'trackNumber' => $aT->trackNumber,
+                'type' => 'A'
+            ]);
+        }
     }
 
     public function addTrackPlaylist(Playlist $pl, AudioTrack $ad): void {
-
         $query = "Insert into playlist2track (playlist_id, track_id) values (:playlist_id :track_id)";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
@@ -111,7 +137,7 @@ class DeefyRepository
     // Renvoie un array de AudioTrack
     public function findAllTrack(): array {
 
-        $query = "select titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
+        $query = "select id, titre, artiste_album, genre, duree, filename, annee_album, titre_album, numero_album from track" ;
         $stmt = $this->pdo->prepare($query) ;
         $stmt->execute() ;
 
@@ -119,7 +145,7 @@ class DeefyRepository
         $result = $stmt->fetch() ;
         while($result!=null){
             if($result['artiste_album']!=null){
-                $a[] = new AlbumTrack($result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
+                $a[] = new AlbumTrack($result['id'], $result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
             $result = $stmt->fetch() ;
         }
 

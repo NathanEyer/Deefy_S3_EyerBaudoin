@@ -30,6 +30,13 @@ class DefaultAction extends Action {
         </form>
     </li>
     <li>
+        <form action="index.php?action=delete-playlist" method="POST">
+            <label for="nom_playlist_sup">Supprimer playlist:</label>
+            <input type="text" id="nom_playlist_sup" name="nom_playlist_sup" required>
+            <button type="submit">Supprimer</button>
+        </form>
+    </li>
+    <li>
         <form action="index.php?action=add-podcasttrack" method="POST"><strong>Ajout d\'un PodCastTrack</strong></br>
             <label for="podcast-title">Titre: </label>
             <input type="text" id="podcast-title" name="podcast-title" required>

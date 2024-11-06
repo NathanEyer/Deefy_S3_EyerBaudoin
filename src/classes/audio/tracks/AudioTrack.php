@@ -10,19 +10,19 @@ use iutnc\deefy\exception\InvalidPropertyValueException;
  */
 abstract class AudioTrack{
     //Attributs de description de la piste
-    private string $title, $artist, $sort, $time, $fileName;
-    private int $year, $id;
+    private string $title, $artist, $sort, $fileName;
+    private int $year, $id, $time;
 
     /**
      * @param int $id
      * @param string $title
      * @param string $artist
      * @param string $sort
-     * @param string $time
+     * @param int $time
      * @param string $fileName
      * @param int $year
      */
-    public function __construct(int $id, string $title, string $artist, string $sort, string $time, string $fileName, int $year)
+    public function __construct(int $id, string $title, string $artist, string $sort, int $time, string $fileName, int $year)
     {
         $this->id = $id;
         $this->title = $title;
@@ -69,7 +69,7 @@ abstract class AudioTrack{
      * Permet de modifier l'attribut time
      * @throws InvalidPropertyValueException
      */
-    public function setTime(string $time): void{
+    public function setTime(int $time): void{
         if($time > 0){$this->time = $time;}
         else{throw new InvalidPropertyValueException("invalid property : $time");}
     }

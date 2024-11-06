@@ -13,6 +13,7 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'iutnc\\deefy\\action\\AddPlaylistAction' => __DIR__ . '/../..' . '/classes/action/AddPlaylistAction.php',
         'iutnc\\deefy\\action\\AddPodcastTrackAction' => __DIR__ . '/../..' . '/classes/action/AddPodcastTrackAction.php',
         'iutnc\\deefy\\action\\DefaultAction' => __DIR__ . '/../..' . '/classes/action/DefaultAction.php',
+        'iutnc\\deefy\\action\\DelPlaylistAction' => __DIR__ . '/../..' . '/classes/action/DelPlaylistAction.php',
         'iutnc\\deefy\\action\\DisplayAllTrackAction' => __DIR__ . '/../..' . '/classes/action/DisplayAllTrackAction.php',
         'iutnc\\deefy\\action\\DisplayPlaylistAction' => __DIR__ . '/../..' . '/classes/action/DisplayPlaylistAction.php',
         'iutnc\\deefy\\action\\DisplayPlaylistsAction' => __DIR__ . '/../..' . '/classes/action/DisplayPlaylistsAction.php',
