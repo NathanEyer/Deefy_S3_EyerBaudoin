@@ -23,7 +23,7 @@ class AddPodcastTrackAction extends Action
         $time = filter_input(INPUT_POST, 'podcast-time', FILTER_DEFAULT);
 
         //Crée le podcast
-        $piste = new PodcastTrack(0, $title, $artist, $sort, (int)$time, $fileName, (int)$year);
+        $piste = new PodcastTrack(0, $title, $artist, $sort, (int)$time, $fileName, $year);
 
         //Ajoute
         end($_SESSION['playlists'])->addTrack($piste);

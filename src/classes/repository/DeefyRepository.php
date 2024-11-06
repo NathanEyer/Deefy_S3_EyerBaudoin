@@ -145,9 +145,28 @@ class DeefyRepository
         $a = [] ;
         $result = $stmt->fetch() ;
         while($result!=null){
-            if($result['artiste_album']!=null){
+            if($result['artiste_album']!==null){
 
                 $a[] = new AlbumTrack($result['id'],$result['titre'],$result['artiste_album'],$result['genre'],$result['duree'],$result['filename'],$result['annee_album'],$result['titre_album'], $result['numero_album']) ; }
+
+            $result = $stmt->fetch() ;
+        }
+
+        return $a ;
+    }
+
+    public function findAllPodcast(): array {
+
+        $query = "select id,titre, genre, duree, filename, auteur_podcast, date_podcast from track" ;
+
+        $stmt = $this->pdo->prepare($query) ;
+        $stmt->execute() ;
+
+        $a = [] ;
+        $result = $stmt->fetch() ;
+        while($result!=null){
+            if($result['date_podcast']!==null){
+                $a[] = new PodcastTrack($result['id'],$result['titre'],$result['auteur_podcast'],$result['genre'],$result['duree'],$result['filename'],$result['date_podcast']) ; }
 
             $result = $stmt->fetch() ;
         }

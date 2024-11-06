@@ -2,101 +2,91 @@
 
 namespace iutnc\deefy\action;
 
-use iutnc\deefy\repository\DeefyRepository ;
+use iutnc\deefy\repository\DeefyRepository;
 
 class DefaultAction extends Action {
 
     public function execute(): string {
+        $ret = "";
 
-        $ret = "" ;
-
-        if (isset($_SESSION['email'])){
-            $ret .= '<p>Vous etes connectés avec '.$_SESSION['email'].'</p>';
-
+        // Message de connexion
+        if (isset($_SESSION['email'])) {
+            $ret .= '<p style="text-align: center;">Vous êtes connecté avec ' . $_SESSION['email'] . '</p>';
         }
 
-        $ret .= '<h1>Bienvenue sur deefy</h1>
-        <ul>
-    <li><a href="index.php?action=show-playlist">Afficher la playlist courante</a></li>
-    <li><a href="index.php?action=show-playlists">Afficher toutes les playlists</a></li>
-    <li><a href="index.php?action=show-tracks">Afficher tte les tracks</a></li>
-    <li><a href="index.php?action=signin">s\'inscrire</a></li>
-    <li><a href="index.php?action=login">Se connecter</a></li>
-    <li><a href="index.php?action=logout">Se deconnecter</a></li>
-    <li>
-        <form action="index.php?action=add-playlist" method="POST">
-            <label for="nom">Nouvelle playlist:</label>
-            <input type="text" id="nom" name="nom" required>
-            <button type="submit">Créer</button>
-        </form>
-    </li>
-    <li>
-        <form action="index.php?action=delete-playlist" method="POST">
-            <label for="nom_playlist_sup">Supprimer playlist:</label>
-            <input type="text" id="nom_playlist_sup" name="nom_playlist_sup" required>
-            <button type="submit">Supprimer</button>
-        </form>
-    </li>
-    <li>
-        <form action="index.php?action=add-podcasttrack" method="POST"><strong>Ajout d\'un PodCastTrack</strong></br>
-            <label for="podcast-title">Titre: </label>
-            <input type="text" id="podcast-title" name="podcast-title" required>
+        // Contenu principal
+        $ret .= '<h1 style="text-align: center;">Bienvenue sur deefy</h1>
+        <div style="max-width:900px; margin: auto; display: flex;">
+            <div style="flex: 1; margin-right: 20px;">
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 20px;">
+                        <form action="index.php?action=add-playlist" method="POST">
+                            <label for="nom"><strong>Nouvelle playlist:</strong></label>
+                            <input type="text" id="nom" name="nom" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <button type="submit" style="padding: 8px 16px; margin-top: 10px;">Créer</button>
+                        </form>
+                    </li>
+                    <li style="margin-bottom: 20px;">
+                        <form action="index.php?action=delete-playlist" method="POST">
+                            <label for="nom_playlist_sup"><strong>Supprimer playlist:</strong></label>
+                            <input type="text" id="nom_playlist_sup" name="nom_playlist_sup" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <button type="submit" style="padding: 8px 16px; margin-top: 10px;">Supprimer</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div style="flex: 1; margin-right: 20px;">
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 20px;">
+                        <form action="index.php?action=add-podcasttrack" method="POST"><strong>Ajout d\'un PodCastTrack</strong></br>
+                            <label for="podcast-title">Titre: </label>
+                            <input type="text" id="podcast-title" name="podcast-title" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="podcast-fileName">Lien mp3 : </label>
+                            <input type="text" id="podcast-fileName" name="podcast-fileName" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="podcast-artist">Artiste: </label>
+                            <input type="text" id="podcast-artist" name="podcast-artist" required style="width: 100%; padding: 8px; margin-top: 5px;"><br>
+                            <label for="podcast-year">Année de sortie: </label>
+                            <input type="text" id="podcast-year" name="podcast-year" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="podcast-time">Durée en s: </label>
+                            <input type="number" id="podcast-time" name="podcast-time" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="podcast-sort">Genre: </label>
+                            <input type="text" id="podcast-sort" name="podcast-sort" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="podcast-playlist">Playlist: </label>
+                            <input type="text" id="podcast-playlist" name="podcast-playlist" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <button type="submit" style="padding: 8px 16px; margin-top: 10px;">Ajouter</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div style="flex: 1;">
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 20px;">
+                        <form action="index.php?action=add-albumtrack" method="POST"><strong>Ajout d\'un AlbumTrack</strong></br>
+                            <label for="album-title">Titre: </label>
+                            <input type="text" id="album-title" name="album-title" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album-fileName">Nom de la musique: </label>
+                            <input type="text" id="album-fileName" name="album-fileName" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album-artist">Artiste: </label>
+                            <input type="text" id="album-artist" name="album-artist" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album-year">Année de sortie: </label>
+                            <input type="text" id="album-year" name="album-year" required style="width: 100%; padding: 8px; margin-top: 5px;"><br>
+                            <label for="album-time">Durée en s: </label>
+                            <input type="number" id="album-time" name="album-time" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album-sort">Genre: </label>
+                            <input type="text" id="album-sort" name="album-sort" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album-trackNumber" id="trackNumber">Numéro du track: </label>
+                            <input type="text" id="album-trackNumber" name="album-trackNumber" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album" id="album">Nom de l\'album: </label>
+                            <input type="text" id="album" name="album" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <label for="album-playlist">Playlist: </label>
+                            <input type="text" id="album-playlist" name="album-playlist" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <button type="submit" style="padding: 8px 16px; margin-top: 10px;">Ajouter</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>';
 
-            <label for="podcast-fileName">Lien mp3: </label>
-            <input type="text" id="podcast-fileName" name="podcast-fileName" required>
-
-            <label for="podcast-artist">Artiste: </label>
-            <input type="text" id="podcast-artist" name="podcast-artist" required><br>
-
-            <label for="podcast-year">Année de sortie: </label>
-            <input type="number" id="podcast-year" name="podcast-year" required>
-
-            <label for="podcast-time">Durée en s: </label>
-            <input type="number" id="podcast-time" name="podcast-time" required>
-
-            <label for="podcast-sort">Genre: </label>
-            <input type="text" id="podcast-sort" name="podcast-sort" required>
-            <button type="submit">Ajouter</button>
-            
-            <label for="podcast-playlist">Playlist: </label>
-            <input type="text" id="podcast-playlist" name="podcast-playlist" required>
-            <button type="submit">Ajouter</button>
-        </form>
-    </li>
-    <li>
-        <form action="index.php?action=add-albumtrack" method="POST"><strong>Ajout d\'un AlbumTrack</strong></br>
-            <label for="album-title">Titre: </label>
-            <input type="text" id="album-title" name="album-title" required>
-
-            <label for="album-fileName">Lien mp3: </label>
-            <input type="text" id="album-fileName" name="album-fileName" required>
-
-            <label for="album-artist">Artiste: </label>
-            <input type="text" id="album-artist" name="album-artist" required>
-
-            <label for="album-year">Année de sortie: </label>
-            <input type="number" id="album-year" name="album-year" required><br>
-
-            <label for="album-time">Durée en s: </label>
-            <input type="number" id="album-time" name="album-time" required>
-
-            <label for="album-sort">Genre: </label>
-            <input type="text" id="album-sort" name="album-sort" required>
-
-            <label for="album-trackNumber" id="trackNumber">Numéro du track: </label>
-            <input type="text" id="album-trackNumber" name="album-trackNumber" required>
-
-            <label for="album" id="album">Nom de l\'album: </label>
-            <input type="text" id="album" name="album" required>
-            <button type="submit">Ajouter</button>
-            
-            <label for="album-playlist">Playlist: </label>
-            <input type="text" id="album-playlist" name="album-playlist" required>
-            <button type="submit">Ajouter</button>
-            </form>
-        </li>
-    </ul>';
-
-            return $ret ;
+        return $ret;
     }
 }

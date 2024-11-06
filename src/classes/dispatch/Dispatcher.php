@@ -8,6 +8,7 @@ use iutnc\deefy\action\AddPlaylistAction;
 use iutnc\deefy\action\AddPodcastTrackAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DelPlaylistAction;
+use iutnc\deefy\action\DisplayAllPodcastAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
 use iutnc\deefy\action\DisplayPlaylistsAction;
 use iutnc\deefy\action\DisplayAllTrackAction;
@@ -44,6 +45,9 @@ class Dispatcher
                 break;
             case 'show-tracks':
                 $html = (new DisplayAllTrackAction())->execute();
+                break;
+            case 'show-podcasts':
+                $html = (new DisplayAllPodcastAction())->execute();
                 break;
             case 'signin':
                 $html = (new SigninAction())->execute();

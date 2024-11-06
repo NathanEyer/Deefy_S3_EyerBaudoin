@@ -13,9 +13,9 @@ class PodcastTrack extends AudioTrack{
      * @param string $sort
      * @param int $time
      * @param string $fileName
-     * @param int $year
+     * @param string $year
      */
-    public function __construct(int $id, string $title, string $artist, string $sort, int $time, string $fileName, int $year) {
+    public function __construct(int $id, string $title, string $artist, string $sort, int $time, string $fileName, string $year) {
         parent::__construct($id, $title, $artist, $sort, $time, $fileName, $year);
     }
 

@@ -26,7 +26,7 @@ class AddAlbumTrackAction extends Action
         $playlist = filter_input(INPUT_POST, 'album-playlist', FILTER_DEFAULT);
 
         //Crée le podcast
-        $piste = new AlbumTrack(0, $title, $artist, $sort, (int)$time, $fileName, (int)$year, $album, (int)$trackNumber);
+        $piste = new AlbumTrack(0, $title, $artist, $sort, (int)$time, $fileName, $year, $album, (int)$trackNumber);
 
         //Ajoute
         $r = DeefyRepository::getInstance() ;

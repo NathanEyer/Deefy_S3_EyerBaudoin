@@ -13,6 +13,7 @@ return array(
     'iutnc\\deefy\\action\\AddPodcastTrackAction' => $baseDir . '/classes/action/AddPodcastTrackAction.php',
     'iutnc\\deefy\\action\\DefaultAction' => $baseDir . '/classes/action/DefaultAction.php',
     'iutnc\\deefy\\action\\DelPlaylistAction' => $baseDir . '/classes/action/DelPlaylistAction.php',
+    'iutnc\\deefy\\action\\DisplayAllPodcastAction' => $baseDir . '/classes/action/DisplayAllPodcastAction.php',
     'iutnc\\deefy\\action\\DisplayAllTrackAction' => $baseDir . '/classes/action/DisplayAllTrackAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistAction' => $baseDir . '/classes/action/DisplayPlaylistAction.php',
     'iutnc\\deefy\\action\\DisplayPlaylistsAction' => $baseDir . '/classes/action/DisplayPlaylistsAction.php',

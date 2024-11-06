@@ -17,12 +17,12 @@ class AlbumTrack extends AudioTrack {
      * @param string $sort
      * @param int $time
      * @param string $fileName
-     * @param int $year
+     * @param string $year
      * @param string $album
      * @param int $trackNumber
      */
 
-    public function __construct(int $id, string $title, string $artist, string $sort, int $time, string $fileName, int $year, string $album, int $trackNumber) {
+    public function __construct(int $id, string $title, string $artist, string $sort, int $time, string $fileName, string $year, string $album, int $trackNumber) {
         parent::__construct($id, $title, $artist, $sort, $time, $fileName, $year);
         $this->trackNumber = $trackNumber;
         $this->album = $album;
