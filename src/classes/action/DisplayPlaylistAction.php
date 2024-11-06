@@ -14,7 +14,7 @@ class DisplayPlaylistAction extends Action
     {
         //Vérifie que des playlists sont enregistrées
         if (empty($_SESSION['playlist'])) {
-            return "Playlist introuvables";
+            return "<br><div style='text-align: center; font-size: 25px'> Playlist introuvable</div>";
         }
 
         $playlist = unserialize($_SESSION['playlist']);

@@ -12,11 +12,11 @@ class DisplayPlaylistsAction extends Action
         $playlists = $r->findAllPlaylist();
 
         //Affiche la liste des playlists avec un lien référant à l'affichage de celles-ci
-        $html = "<ul>";
+        $html = "<br><div style=\"text-align: center\">";
         foreach ($playlists as $playlist) {
             $nom = $playlist->name;
-            $html .= "<li><a href=\"index.php?action=show-playlist&nom=$nom\">" . $nom . "</a></li>";
+            $html .= "<a style='font-size: 25px' href=\"index.php?action=show-playlist&nom=$nom\">" . $nom . "</a><br>";
         }
-        return $html .= "</ul>";
+        return $html;
     }
 }
