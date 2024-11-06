@@ -12,8 +12,6 @@ class AddAlbumTrackAction extends Action
         //Vérifie l'existence de playlists
         if(empty($_SESSION['playlists'])) {return "Playlist inexistante";}
 
-        $playlist = end($_SESSION['playlists']);
-
         //Nettoye chaque valeurs donnés dans le formulaire
         $title = filter_input(INPUT_POST, 'album-title', FILTER_DEFAULT);
         $fileName = filter_input(INPUT_POST, 'album-fileName', FILTER_DEFAULT);
@@ -30,6 +28,7 @@ class AddAlbumTrackAction extends Action
 
         //Ajoute
         $r = DeefyRepository::getInstance() ;
+        $r->addTrackPlaylist($playlist, $piste);
 
         return "AlbumTrack '$title' ajouté à la playlist";
     }
